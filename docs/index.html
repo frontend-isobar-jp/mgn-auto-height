@@ -8,12 +8,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<style>
 		body { background: #FFF; margin: 0px; overflow: hidden; overflow: auto;}
+		* { box-sizing: border-box; }
 		a { color: #EC4500; text-decoration: underline; cursor: pointer; }
 		img { max-width: 100%; height: auto; }
 		main { padding: 40px 20px; }
 		main a { font-weight: bold; }
 		main section { margin-top: 60px; }
-		main section > section { margin-top: 40px; }
+		main section > section { margin-top: 60px; }
 		main h1, h2, h3 { margin: 0; padding: 0; }
 		main h2 { font-size: 1.75em; margin-bottom: 20px; border-bottom: 4px solid #333; }
 		main h3 { margin-bottom: 20px; font-size: 1em; background: #333; color: #FFF; padding: 10px; }
@@ -23,6 +24,12 @@
 		main pre mark { background: rgba(236,69,0,0.2); font-weight: bold; display: inline-block; padding: 0 3px; }
 		footer { padding: 20px; background: #F7F7F7; }
 		footer p { font-size: 0.75em; }
+
+		.col { margin-top: 20px; }
+		.col:after { content: ''; display: table; clear: both; }
+		.col > div { float: left; width: 33.33%;  }
+		.col .box { background: #CCC; border: 1px solid #999; padding: 20px; margin: 0; }
+		.col .box2 { border: 1px solid #999; padding: 20px; margin: 0; }
 	</style>
 
 </head>
@@ -34,13 +41,93 @@
 		<p>Implement function that automatically adjusts the specified element's height.</p>
 		<p><a href="https://github.com/frontend-isobar-jp/mgn-auto-height">https://github.com/frontend-isobar-jp/mgn-auto-height</a></p>
 
-		<section>
-			<h2>Default</h2>
 <div><pre data-type="javascript"><code>
-</code></pre></div>
-<div><pre data-type="HTML"><code>
+<mark>new jAutoHeight( ".j-autoheight" );</mark>
 </code></pre></div>
 
+		<section>
+			<h2>Default</h2>
+<div><pre data-type="HTML"><code>
+&lt;div class="col <mark>j-autoheight</mark>"&gt;
+    &lt;div&gt;text text &lt;/div&gt;
+    &lt;div&gt;text text &lt;/div&gt;
+    &lt;div&gt;text text &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div>
+
+			<div class="col j-autoheight">
+			    <div class="box">text text text text text text text text text text text text text text text</div>
+			    <div class="box">text text text text text text</div>
+			    <div class="box">text text text text text text text text</div>
+			</div>
+
+		</section>
+
+		<section>
+			<h2>Option</h2>
+			<section>
+				<h3>data-target="div>p"</h3>
+<div><pre data-type="HTML"><code>
+&lt;div class="col j-autoheight" <mark>data-target="div>p"</mark>&gt;
+    &lt;div&gt;<mark>&lt;p&gt;</mark>text text<mark>&lt;/p&gt;</mark>&lt;/div&gt;
+    &lt;div&gt;<mark>&lt;p&gt;</mark>text text<mark>&lt;/p&gt;</mark>&lt;/div&gt;
+    &lt;div&gt;<mark>&lt;p&gt;</mark>text text<mark>&lt;/p&gt;</mark>&lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div>
+				<div class="col j-autoheight" data-target="div>p">
+				    <div><p class="box">text text text text text text text text text text text text text text text</p></div>
+				    <div><p class="box">text text text text text text</p></div>
+				    <div><p class="box">text text text text text text text text</p></div>
+				</div>
+			</section>
+			<section>
+				<h3>data-target=".className"</h3>
+<div><pre data-type="HTML"><code>
+&lt;div class="col j-autoheight" <mark>data-target=".className"</mark>&gt;
+    &lt;div&gt;&lt;p <mark>class="className"</mark>&gt;text text&lt;/p&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;p <mark>class="className"</mark>&gt;text text&lt;/p&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;p <mark>class="className"</mark>&gt;text text&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div>
+				<div class="col j-autoheight" data-target=".className">
+				    <div><p class="box className">text text text text text text text text text text text text text text text</p></div>
+				    <div><p class="box className">text text text text text text</p></div>
+				    <div><p class="box className">text text text text text text text text</p></div>
+				</div>
+			</section>
+			<section>
+				<h3>data-target=".className" data-target2=".className2"</h3>
+<div><pre data-type="HTML"><code>
+&lt;div class="col j-autoheight" <mark>data-target=".className" data-target2=".className2"</mark>&gt;
+	&lt;div&gt;
+		&lt;p <mark>class="className"</mark>&gt;text text&lt;/p&gt;
+		&lt;p <mark>class="className2"</mark>&gt;text text&lt;/p&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;p <mark>class="className"</mark>&gt;text text&lt;/p&gt;
+		&lt;p <mark>class="className2"</mark>&gt;text text&lt;/p&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;p <mark>class="className"</mark>&gt;text text&lt;/p&gt;
+		&lt;p <mark>class="className2"</mark>&gt;text text&lt;/p&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div>
+				<div class="col j-autoheight" data-target=".className" data-target2=".className2">
+				    <div>
+						<p class="box className">text text text text text text text text text text text text text text text</p>
+						<p class="box2 className2">text text text text text text text text text</p>
+					</div>
+				    <div>
+						<p class="box className">text text text text text text</p>
+						<p class="box2 className2">text text</p>
+					</div>
+				    <div>
+						<p class="box className">text text text text text text text text</p>
+						<p class="box2 className2">text text text text text text text text</p>
+					</div>
+				</div>
+			</section>
 
 		</section>
 
